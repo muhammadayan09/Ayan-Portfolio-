@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="google-site-verification" content="MBrfZiFRPKaKG1NMPBRYC4ky4LBXN8lpGTlRcFKw-OI" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Muhammad Ayan</title>
+<title>Muhammad Ayan Website Developer Expert</title>
+<meta name="description" content="Muhammad Ayan is a website developer in Delhi with 3+ years of experience building WordPress, Shopify, React, Angular and SEO-ready websites.">
 <meta name="description" content="Muhammad Ayan — freelance website developer in Delhi. WordPress, Shopify, React, Angular, Node.js and on-page SEO. 30+ websites for clients in the UK, Dubai and India.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -178,6 +180,7 @@ main,footer{overflow-x:clip}
 .filters button{font-family:var(--body);font-size:14px;font-weight:500;color:var(--muted);background:transparent;border:1px solid var(--line-2);border-radius:999px;padding:8px 16px;cursor:pointer;transition:all .2s}
 .filters button:hover{color:var(--text);border-color:var(--text)}
 .filters button[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
+.filters button .filter-label{display:inline-flex;align-items:center}
 .filters button sup{font-family:var(--mono);font-size:10px;margin-left:4px;opacity:.7}
 .works{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .work{position:relative;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:22px;background:var(--bg-2);overflow:hidden;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .4s,box-shadow .4s}
@@ -960,7 +963,7 @@ footer a:hover{color:var(--saffron)}
   }).join('');
   filters.innerHTML = cats.map(function(c,i){
     var n = c==='All' ? P.length : P.filter(function(p){return p.c===c}).length;
-    return '<button type="button" id="flt-'+i+'" aria-pressed="'+(i===0)+'" data-f="'+c+'">'+c+'<sup>'+n+'</sup></button>';
+    return '<button type="button" id="flt-'+i+'" aria-pressed="'+(i===0)+'" data-f="'+c+'" aria-label="Filter projects: '+c+'"><span class="filter-label">'+c+'</span><sup aria-hidden="true">'+n+'</sup></button>';
   }).join('');
   var moreWrap = document.getElementById('moreWrap'), moreBtn = document.getElementById('moreBtn');
   function pop(list){ if(reduce) return; list.forEach(function(w,i){ w.animate([{opacity:0,transform:'translateY(24px) scale(.97)'},{opacity:1,transform:'none'}],{duration:550,delay:i*50,easing:'cubic-bezier(.2,.8,.2,1)',fill:'backwards'}); }); }
@@ -973,7 +976,9 @@ footer a:hover{color:var(--saffron)}
   filters.addEventListener('click', function(e){
     var b = e.target.closest('button'); if(!b) return;
     filters.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed', x===b)});
-    var f = b.dataset.f, shown = [];
+    var label = b.querySelector('.filter-label');
+    var f = b.dataset.f || (label ? label.textContent.trim() : b.textContent.replace(/\d+/g,'').trim());
+    var shown = [];
     if(f!=='All') works.classList.add('all'); else { works.classList.remove('all'); moreBtn.innerHTML='View all projects <b>'+P.length+'</b>'; }
     moreWrap.hidden = f!=='All';
     works.querySelectorAll('.work').forEach(function(w){
